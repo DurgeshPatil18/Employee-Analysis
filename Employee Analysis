@@ -1,0 +1,66 @@
+Employee Dataset and Analysis Queries
+
+
+1.  List all employees with their department ID and role ID
+    
+-->    SELECT emp_id, name, dept_id, role_id FROM Employee
+
+2. Count total number of employees
+
+ -->   SELECT COUNT(emp_id) AS total_employees FROM Employee;
+
+3. Find number of employees in each department
+   
+-->    SELECT dept_id, COUNT(emp_id) AS emp_count FROM Employee GROUP BY dept_id ORDER BY emp_count DESC;
+
+4. Find total salary expense per department
+ 
+-->    SELECT dept_id, SUM(salary) AS total_salary FROM Employee GROUP BY dept_id ORDER By total_salary DESC;
+
+5.  Find the minimum, maximum, and average salary of all employees
+
+-->    SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary, ROUND(AVG(salary), 2) AS avg_salary FROM Employee;
+
+6. Find average salary per department
+ 
+-->   SELECT dept_id, ROUND(AVG(salary), 2) AS avg_salary FROM Employee GROUP BY dept_id;
+
+7.  Find total salary expense per role
+    
+-->   SELECT role_id, SUM(salary) AS total_salary FROM Employee GROUP BY role_id;
+
+8. Find department with highest average salary
+ 
+-->   SELECT dept_id, ROUND(AVG(salary), 2) AS avg_salary FROM Employee GROUP BY dept_id ORDER BY avg_salary DESC LIMIT 1;
+
+9. Find number of employees who joined after 2020
+ 
+-->   SELECT COUNT(emp_id) AS joined_after_2020 FROM Employee WHERE doj > '2020-01-01';
+
+10. Find department-wise minimum salary
+ 
+-->    SELECT dept_id, MIN(salary) AS min_salary FROM Employee GROUP BY dept_id;
+
+11. Find department-wise maximum salary
+ 
+-->    SELECT dept_id, MAX(salary) AS max_salary FROM Employee GROUP BY dept_id;
+
+12. Find total salary paid by company each year
+ 
+-->    SELECT YEAR(doj) AS year_joined, SUM(salary) AS total_salary FROM Employee GROUP BY YEAR(doj) ORDER BY year_joined;
+ 
+13. Find number of employees within each salary range
+ 
+-->   SELECT CASE WHEN salary < 40000 THEN 'Below 40K' WHEN salary BETWEEN 40000 AND 80000 THEN '40K-80K' WHEN salary BETWEEN 80001 AND 120000 THEN '80K-1.2L' ELSE 'Above 1.2L' END AS salary_range, COUNT(*) AS total_employees FROM Employee GROUP BY salary_range;
+
+14. Find average salary per role with rounding
+
+-->    SELECT role_id, ROUND(AVG(salary), 2) AS avg_salary FROM Employee GROUP BY role_id ORDER BY avg_salary DESC;
+
+15. Department name with total salary and number of employees
+ 
+-->    SELECT d.dept_name, COUNT(e.emp_id) AS total_employees, ROUND(SUM(e.salary), 2) AS total_salary FROM Employee e JOIN Department d ON e.dept_id = d.dept_id GROUP BY d.dept_name ORDER BY total_salary DESC;
+
+16.  Role name with average salary of employees in that role
+
+-->     SELECT r.role_name, ROUND(AVG(e.salary), 2) AS avg_salary FROM Employee e JOIN Job_Role r ON e.role_id = r.role_id GROUP BY r.role_name ORDER BY avg_salary DESC;
