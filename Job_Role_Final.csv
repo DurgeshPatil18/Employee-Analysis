@@ -1,0 +1,6 @@
+role_id,role_name,min_salary,max_salary
+1,Software Engineer,40000,120000
+2,HR Executive,30000,80000
+3,Project Manager,60000,150000
+4,Data Analyst,40000,100000
+5,Finance Officer,35000,90000
